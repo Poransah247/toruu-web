@@ -3,15 +3,96 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=<>, initial-scale=1.0">
-    <title>Document</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculator with Intro</title>
+    <style>
+        body { 
+            display: flex; 
+            height: 100vh; 
+            justify-content: center; 
+            align-items: center; 
+            background-color: #f0f2f5; 
+            font-family: Arial, sans-serif;
+        }
+        .intro, .calculator {
+            text-align: center;
+        }
+        .intro {
+            display: block;
+            font-size: 2rem;
+            animation: fadeOut 3s forwards;
+        }
+        .calculator {
+            display: none;
+        }
+        @keyframes fadeOut {
+            from { opacity: 1; }
+            to { opacity: 0; display: none; }
+        }
+        .calculator.active {
+            display: block;
+        }
+        input[type="button"] {
+            width: 50px; height: 50px; 
+            margin: 5px;
+            font-size: 1.5rem;
+        }
+    </style>
 </head>
 <body>
-    <p> hello toru</p>
-    <p> hello toru,,,tumi ki jano ami tumare vallobase</p>
-    <P>    i love moro </P>
-    <p>    i love my country </p>
-    <p> i love my mother also more then everything
-    </p>
+    <div class="intro">Hello, Poran Sah!</div>
+
+    <div class="calculator" id="calculator">
+        <h2>Calculator</h2>
+        <input type="text" id="display" readonly>
+        <br>
+        <div>
+            <input type="button" value="1" onclick="appendToDisplay('1')">
+            <input type="button" value="2" onclick="appendToDisplay('2')">
+            <input type="button" value="3" onclick="appendToDisplay('3')">
+            <input type="button" value="+" onclick="appendToDisplay('+')">
+        </div>
+        <div>
+            <input type="button" value="4" onclick="appendToDisplay('4')">
+            <input type="button" value="5" onclick="appendToDisplay('5')">
+            <input type="button" value="6" onclick="appendToDisplay('6')">
+            <input type="button" value="-" onclick="appendToDisplay('-')">
+        </div>
+        <div>
+            <input type="button" value="7" onclick="appendToDisplay('7')">
+            <input type="button" value="8" onclick="appendToDisplay('8')">
+            <input type="button" value="9" onclick="appendToDisplay('9')">
+            <input type="button" value="*" onclick="appendToDisplay('*')">
+        </div>
+        <div>
+            <input type="button" value="C" onclick="clearDisplay()">
+            <input type="button" value="0" onclick="appendToDisplay('0')">
+            <input type="button" value="=" onclick="calculate()">
+            <input type="button" value="/" onclick="appendToDisplay('/')">
+        </div>
+    </div>
+
+    <script>
+        setTimeout(() => {
+            document.querySelector('.intro').style.display = 'none';
+            document.getElementById('calculator').classList.add('active');
+        }, 3000);
+
+        function appendToDisplay(value) {
+            document.getElementById('display').value += value;
+        }
+
+        function clearDisplay() {
+            document.getElementById('display').value = '';
+        }
+
+        function calculate() {
+            try {
+                document.getElementById('display').value = eval(document.getElementById('display').value);
+            } catch {
+                document.getElementById('display').value = 'Error';
+            }
+        }
+    </script>
 </body>
 </html>
